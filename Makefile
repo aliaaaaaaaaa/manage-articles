@@ -8,5 +8,6 @@ stopDb:
 run:
 	/bin/bash script/runDb.sh
 	sleep 3;
+	go mod vendor;
 	go run main.go
 
