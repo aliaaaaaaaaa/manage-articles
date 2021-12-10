@@ -9,3 +9,4 @@ run:
 	/bin/bash script/runDb.sh
 	sleep 3;
 	go run main.go
+
