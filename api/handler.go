@@ -28,7 +28,7 @@ func (h handler) StartWebServer() {
 	Requests := echoServer.Group("")
 	configEcho := middleware.JWTConfig{
 		Claims:     &utils.JwtCustomClaims{},
-		SigningKey: []byte("secret"),
+		SigningKey: []byte("lololo"),
 	}
 	Requests.Use(middleware.JWTWithConfig(configEcho))
 
