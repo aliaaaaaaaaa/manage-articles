@@ -1,6 +1,8 @@
 # manage-articles
- you need docker-compose and go compiler \n
-for starting the program run the command ```  make run ``` in terminal
+ you need docker-compose and go compiler 
+for starting the program run the command 
+```  make run ```
+in terminal
 
 for runing the test frist run the docker-compose db with the command 
 ```  make startDb ```
