@@ -32,7 +32,7 @@ func (a ArticleRepositoryImpl) UpdateArticle(article model.Article) (*model.Arti
 }
 
 func (a ArticleRepositoryImpl) DeleteArticle(id int) error {
-	article := model.Article{Model: gorm.Model{ID: uint(id)}}
+	article := model.Article{Id: id}
 	err := a.db.Delete(&article).Error
 	return err
 }
