@@ -4,7 +4,7 @@ for starting the program run the command
 ```  make run ```
 in terminal
 
-for runing the test frist run the docker-compose db with the command 
+for runing the test first run the docker-compose db with the command 
 ```  make startDb ```
 and after that run 
 ```  make testing ```
