@@ -4,12 +4,11 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"manageArticles_/internal/model"
-	"manageArticles_/pkg/utils"
 )
 
 type UserRepository interface {
 	FindUser(email string, password string) (*model.User, error)
-	CreateUser(user *model.User) (*model.User, error)
+	CreateUser(user *model.User) error
 	FindBtID(id int) (*model.User, error)
 }
 
@@ -25,16 +24,15 @@ func (i *UserRepositoryImpl) FindBtID(id int) (*model.User, error) {
 	err := i.db.Where("id=?", id).Find(user).Error
 	return user, err
 }
-func (u *UserRepositoryImpl) CreateUser(user *model.User) (*model.User, error) {
-	user.Password = utils.ReturnUserEncryptedPassword(user.Email, user.Password)
-	user.IsActive = true
+func (u *UserRepositoryImpl) CreateUser(user *model.User) error {
+
 	err := u.db.Create(user).Error
-	return user, err
+	return err
 }
 
 func (u *UserRepositoryImpl) FindUser(email string, password string) (*model.User, error) {
 	user := new(model.User)
-	password = utils.ReturnUserEncryptedPassword(email, password)
+
 	err := u.db.Where("email=? and password=?", email, password).Find(user).Error
 	return user, err
 }

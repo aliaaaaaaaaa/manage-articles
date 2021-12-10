@@ -3,7 +3,6 @@ package api
 import (
 	"github.com/labstack/echo"
 	"manageArticles_/internal/model"
-	"manageArticles_/pkg/utils"
 	"net/http"
 )
 
@@ -13,8 +12,7 @@ func (h *handler) registerUser(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	createUser, err := h.userRepo.CreateUser(&user)
-	token, err := utils.GetToken(*createUser)
+	token, err := h.userService.Register(user)
 	if err != nil {
 		return err
 	}

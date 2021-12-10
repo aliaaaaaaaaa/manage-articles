@@ -13,14 +13,10 @@ func (h *handler) createArticle(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	id := utils.GetUser(c)
-	FindedUser, err := h.userRepo.FindBtID(id)
+	userId := utils.GetUserID(c)
+	err = h.articleService.CreateArticle(&article, userId)
 	if err != nil {
 		return err
 	}
-	createArticle, err := h.ArticleRepo.CreateArticle(article, *FindedUser)
-	if err != nil {
-		return err
-	}
-	return c.JSON(http.StatusOK, createArticle)
+	return c.JSON(http.StatusOK, article)
 }

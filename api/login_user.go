@@ -3,7 +3,6 @@ package api
 import (
 	"github.com/labstack/echo"
 	"manageArticles_/internal/model"
-	"manageArticles_/pkg/utils"
 	"net/http"
 )
 
@@ -13,12 +12,8 @@ func (h *handler) login(c echo.Context) error {
 	if err != nil {
 		return echo.ErrUnauthorized
 	}
-	user, err = h.userRepo.FindUser(user.Email, user.Password)
-	if err != nil {
-		return echo.ErrUnauthorized
-	}
+	token, err := h.userService.Login(user.Email, user.Password)
 
-	token, err := utils.GetToken(*user)
 	if err != nil {
 		return err
 	}
