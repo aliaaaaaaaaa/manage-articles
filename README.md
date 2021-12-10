@@ -1,5 +1,5 @@
 # manage-articles
- you need docker-compose and go compiler 
+# you need docker-compose and go compiler 
 for starting the program run the command 
 ```  make run ```
 in terminal
