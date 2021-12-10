@@ -9,12 +9,13 @@ import (
 )
 
 type handler struct {
-	userRepo repo.UserRepository
-	config   config.ManageArticalConfig
+	userRepo    repo.UserRepository
+	config      config.ManageArticalConfig
+	ArticleRepo repo.ArticleRepository
 }
 
-func newHandler(userRepo repo.UserRepository) *handler {
-	return &handler{userRepo: userRepo}
+func newHandler(userRepo repo.UserRepository, articleRepo repo.ArticleRepository, config config.ManageArticalConfig) *handler {
+	return &handler{userRepo: userRepo, config: config, ArticleRepo: articleRepo}
 }
 
 func (h handler) StartWebServer() {
@@ -30,5 +31,7 @@ func (h handler) StartWebServer() {
 		SigningKey: []byte("secret"),
 	}
 	Requests.Use(middleware.JWTWithConfig(configEcho))
+
+	Requests.GET("/article", h.getArticle)
 	echoServer.Logger.Fatal(echoServer.Start(":" + h.config.ServerConfig.Port))
 }

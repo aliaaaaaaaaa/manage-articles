@@ -3,6 +3,7 @@ package utils
 import (
 	"github.com/dgrijalva/jwt-go"
 	"manageArticles_/internal/model"
+	"strconv"
 	"time"
 )
 
@@ -26,4 +27,9 @@ func GetToken(u model.User) (string, error) {
 		return "", err
 	}
 	return t, nil
+}
+
+func StringToInt(s string) int {
+	i, _ := strconv.Atoi(s)
+	return i
 }
