@@ -32,6 +32,9 @@ func (h handler) StartWebServer() {
 	}
 	Requests.Use(middleware.JWTWithConfig(configEcho))
 
-	Requests.GET("/article", h.getArticle)
+	Requests.GET("/article/:limit/:offset", h.getArticle)
+	Requests.POST("/article", h.createArticle)
+	Requests.DELETE("/article/:id", h.deleteArticle)
+	Requests.PUT("/article", h.updateArticle)
 	echoServer.Logger.Fatal(echoServer.Start(":" + h.config.ServerConfig.Port))
 }
