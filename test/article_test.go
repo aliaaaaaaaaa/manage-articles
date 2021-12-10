@@ -20,4 +20,10 @@ func TestArticle(t *testing.T) {
 	assert.Equal(t, createArticle.Author, user.Name)
 	articles := articleRepo.ShowArticles(10, 0)
 	assert.NotEmpty(t, articles)
+	article.Title = "updated"
+	updateArticle, err := articleRepo.UpdateArticle(article)
+	assert.Empty(t, err)
+	assert.Equal(t, updateArticle.Title, article.Title)
+	err = articleRepo.DeleteArticle(int(article.ID))
+	assert.Empty(t, err)
 }
