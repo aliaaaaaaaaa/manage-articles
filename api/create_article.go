@@ -1,7 +1,6 @@
 package api
 
 import (
-	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo"
 	"manageArticles_/internal/model"
 	"manageArticles_/pkg/utils"
@@ -14,9 +13,8 @@ func (h *handler) createArticle(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	user := c.Get("user").(*jwt.Token)
-	Claims := user.Claims.(*utils.JwtCustomClaims)
-	FindedUser, err := h.userRepo.FindBtID(Claims.UserId)
+	id := utils.GetUser(c)
+	FindedUser, err := h.userRepo.FindBtID(id)
 	if err != nil {
 		return err
 	}
