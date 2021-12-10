@@ -15,7 +15,7 @@ func (h *handler) createArticle(c echo.Context) error {
 		return err
 	}
 	user := c.Get("user").(*jwt.Token)
-	Claims := user.Claims.(utils.JwtCustomClaims)
+	Claims := user.Claims.(*utils.JwtCustomClaims)
 	FindedUser, err := h.userRepo.FindBtID(Claims.UserId)
 	if err != nil {
 		return err
