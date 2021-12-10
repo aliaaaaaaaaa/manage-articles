@@ -10,11 +10,11 @@ import (
 
 type handler struct {
 	userRepo    repo.UserRepository
-	config      config.ManageArticalConfig
+	config      *config.ManageArticalConfig
 	ArticleRepo repo.ArticleRepository
 }
 
-func newHandler(userRepo repo.UserRepository, articleRepo repo.ArticleRepository, config config.ManageArticalConfig) *handler {
+func NewHandler(userRepo repo.UserRepository, articleRepo repo.ArticleRepository, config *config.ManageArticalConfig) *handler {
 	return &handler{userRepo: userRepo, config: config, ArticleRepo: articleRepo}
 }
 
