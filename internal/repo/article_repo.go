@@ -21,7 +21,8 @@ func NewArticleRepositoryImpl(db *gorm.DB) *ArticleRepositoryImpl {
 
 func (a ArticleRepositoryImpl) CreateArticle(article model.Article, user model.User) (*model.Article, error) {
 	article.UserID = user.Id
-	err := a.db.Create(article).Error
+	article.Author = user.Name
+	err := a.db.Create(&article).Error
 	return &article, err
 }
 
