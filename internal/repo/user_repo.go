@@ -27,6 +27,7 @@ func (i *UserRepositoryImpl) FindBtID(id int) (*model.User, error) {
 }
 func (u *UserRepositoryImpl) CreateUser(user *model.User) (*model.User, error) {
 	user.Password = utils.ReturnUserEncryptedPassword(user.Email, user.Password)
+	user.IsActive = true
 	err := u.db.Create(user).Error
 	return user, err
 }
