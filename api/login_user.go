@@ -15,7 +15,7 @@ func (h *handler) login(c echo.Context) error {
 	}
 	user, err = h.userRepo.FindUser(user.Email, user.Password)
 	if err != nil {
-		return err
+		return echo.ErrUnauthorized
 	}
 
 	token, err := utils.GetToken(*user)
